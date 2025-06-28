@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import useQuizStore from './store/quizStore'
-import QuestionCard from './components/QuestionCard'
 import ChoiceList from './components/ChoiceList'
 import ExplanationPanel from './components/ExplanationPanel'
 import { useKeyboardNav } from './hooks/useKeyboardNav'
@@ -17,6 +16,7 @@ function App() {
   const isAnswerShown = useQuizStore((state) => state.isAnswerShown)
   const score = useQuizStore((state) => state.score)
   const reset = useQuizStore((state) => state.reset)
+  const isQuizFinished = useQuizStore((state) => state.isQuizFinished)
 
   // コンポーネントがマウントされた時に一度だけ問題データを読み込む
   useEffect(() => {
@@ -37,41 +37,52 @@ function App() {
   }, []) // 依存配列を空にして、マウント時に一度だけ実行
 
   const currentQuestion = questions[currentQuestionIndex]
+  const progress = questions.length > 0 ? ((currentQuestionIndex + 1) / questions.length) * 100 : 0
 
   return (
-    <main className="min-h-screen bg-gray-200 flex justify-center items-center p-4 font-sans">
-      <div className="w-full max-w-[400px] mx-auto bg-slate-800 rounded-xl shadow-2xl p-5 space-y-5">
+    <div className="container">
+      <div className="quiz-card" id="quizCard">
         {questions.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-96">
-            <p className="text-xl animate-pulse text-white">問題を読み込んでいます...</p>
+          <div style={{ textAlign: 'center', color: '#667eea' }}>
+            <p className="text-xl animate-pulse">問題を読み込んでいます...</p>
           </div>
-        ) : currentQuestion ? (
+        ) : !isQuizFinished && currentQuestion ? (
           <>
-            <h1 className="text-lg font-bold text-slate-300 text-center">
+            <div className="progress-bar">
+              <div className="progress-fill" style={{ width: `${progress}%` }}></div>
+            </div>
+            <div className="question-number">
               問題 {currentQuestionIndex + 1} / {questions.length}
-            </h1>
-            <QuestionCard questionBody={currentQuestion.body} />
-            <ChoiceList
+            </div>
+            <div className="question">{currentQuestion.body}</div>
+
+            {!isAnswerShown && (
+              <div className="choices" id="choicesContainer">
+                <ChoiceList
+                  choices={currentQuestion.choices}
+                  correctChoiceIndex={currentQuestion.correctChoiceIndex}
+                  isAnswerShown={isAnswerShown}
+                />
+              </div>
+            )}
+
+            <ExplanationPanel
               choices={currentQuestion.choices}
               correctChoiceIndex={currentQuestion.correctChoiceIndex}
               isAnswerShown={isAnswerShown}
             />
-            {isAnswerShown && (
-              <ExplanationPanel
-                choices={currentQuestion.choices}
-                correctChoiceIndex={currentQuestion.correctChoiceIndex}
-              />
-            )}
+            <div className="navigation-hint">
+              <span className="key-icon">→</span>
+              <span id="navigationText">
+                {isAnswerShown ? 'キーを押して次の問題へ' : 'キーを押して解答を表示'}
+              </span>
+            </div>
           </>
         ) : (
-          <ResultScreen
-            score={score}
-            totalQuestions={questions.length}
-            onReset={reset}
-          />
+          <ResultScreen score={score} totalQuestions={questions.length} onReset={reset} />
         )}
       </div>
-    </main>
+    </div>
   )
 }
 

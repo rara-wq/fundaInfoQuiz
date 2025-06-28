@@ -7,49 +7,40 @@ interface Props {
   isAnswerShown: boolean;
 }
 
-const ChoiceList = ({
-  choices,
-  correctChoiceIndex,
-  isAnswerShown,
-}: Props) => {
+function ChoiceList({ choices, isAnswerShown, correctChoiceIndex }: Props) {
   const checkAnswer = useQuizStore((state) => state.checkAnswer);
-  const setShowAnswer = useQuizStore((state) => state.setShowAnswer);
-  const choicePrefixes = ['A.', 'B.', 'C.', 'D.'];
 
-  const handleChoiceClick = (selectedIndex: number) => {
-    if (isAnswerShown) return;
-    checkAnswer(selectedIndex);
-    setShowAnswer(true);
-  };
-
-  const getButtonClass = (index: number) => {
+  const handleChoiceClick = (index: number) => {
     if (!isAnswerShown) {
-      return 'bg-sky-200 hover:bg-sky-300 text-slate-800';
+      checkAnswer(index);
+      // Immediately show the answer after selection
+      useQuizStore.getState().setShowAnswer(true);
     }
-
-    if (index === correctChoiceIndex) {
-      return 'bg-emerald-500 text-white cursor-not-allowed';
-    }
-    return 'bg-slate-400 text-white cursor-not-allowed opacity-70';
   };
 
   return (
-    <div className="space-y-4 rounded-lg border-4 border-green-800 bg-green-900/50 p-4">
-      {choices.map((choice, index) => (
-        <button
-          key={index}
-          disabled={isAnswerShown}
-          onClick={() => handleChoiceClick(index)}
-          className={`w-full text-left font-bold py-8 text-4xl rounded-xl shadow-md transition-colors duration-200 ${getButtonClass(
-            index
-          )}`}
-        >
-          <span className="mr-4 px-4">{choicePrefixes[index]}</span>
-          {choice.text}
-        </button>
-      ))}
-    </div>
+    <>
+      {choices.map((choice, index) => {
+        const isCorrect = index === correctChoiceIndex;
+        return (
+          <div
+            key={index}
+            className={`choice ${isAnswerShown ? (isCorrect ? 'correct' : 'incorrect') : ''}`}
+            onClick={() => handleChoiceClick(index)}
+            data-index={index}
+          >
+            <div className="choice-text">
+              <svg className="choice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                <circle cx="12" cy="12" r="10" stroke="white" />
+                <path d="M9 12l2 2 4-4" stroke="white" />
+              </svg>
+              {choice.text}
+            </div>
+          </div>
+        );
+      })}
+    </>
   );
-};
+}
 
 export default ChoiceList; 
