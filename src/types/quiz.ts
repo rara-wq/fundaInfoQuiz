@@ -6,6 +6,13 @@ export interface Choice {
 export interface Question {
   id: number;
   body: string;
-  choices: readonly [Choice, Choice, Choice, Choice];
-  correctChoiceIndex: 0 | 1 | 2 | 3;
+  imageUrl?: string;
+  choices: Choice[];
+  correctChoiceIndex: number;
+}
+
+export interface Chapter {
+  id: string;
+  title: string;
+  questions: Question[];
 } 

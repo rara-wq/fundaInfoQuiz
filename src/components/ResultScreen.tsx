@@ -1,12 +1,11 @@
-import useQuizStore from "../store/quizStore";
-
 interface Props {
   score: number;
   totalQuestions: number;
   onReset: () => void;
+  onBackToChapterSelect: () => void;
 }
 
-function ResultScreen({ score, totalQuestions, onReset }: Props) {
+function ResultScreen({ score, totalQuestions, onReset, onBackToChapterSelect }: Props) {
   const percentage = Math.round((score / totalQuestions) * 100);
   let emoji, message;
 
@@ -34,6 +33,9 @@ function ResultScreen({ score, totalQuestions, onReset }: Props) {
       <div className="result-message">{message}</div>
       <button className="restart-button" onClick={onReset}>
         もう一度挑戦する
+      </button>
+      <button className="back-button" onClick={onBackToChapterSelect}>
+        章選択に戻る
       </button>
     </div>
   );

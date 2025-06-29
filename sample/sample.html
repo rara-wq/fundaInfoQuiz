@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4択クイズ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .quiz-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.5s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e8e8e8;
+            border-radius: 4px;
+            margin-bottom: 35px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+        }
+
+        .question-number {
+            color: #667eea;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .question {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            padding: 25px;
+            background: #f8f9ff;
+            border-radius: 16px;
+            border: 2px solid #e8ecff;
+        }
+
+        .choices {
+            display: grid;
+            gap: 20px;
+        }
+
+        .choice {
+            background: #ffffff;
+            border: 3px solid #e8ecf5;
+            border-radius: 16px;
+            padding: 28px 35px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-size: 18px;
+            font-weight: 500;
+            color: #34495e;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .choice:hover:not(.answered) {
+            background: #f8f9ff;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+        }
+
+        /* 解答表示時のスタイル */
+        .answered .choice {
+            cursor: default;
+            transition: all 0.5s ease;
+        }
+
+        .answered .choice.correct {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            border-color: #4caf50;
+            color: white;
+            font-weight: 700;
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .answered .choice.incorrect {
+            background: #f5f5f5;
+            border-color: #ddd;
+            color: #999;
+            opacity: 0.7;
+        }
+
+        .choice-text {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .choice-icon {
+            display: none;
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .answered .choice.correct .choice-icon {
+            display: block;
+            fill: white;
+        }
+
+        /* 解説セクション */
+        .explanation-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9ff;
+            border-radius: 16px;
+            border: 2px solid #e8ecff;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .explanation-section.show {
+            display: block;
+        }
+
+        .explanation-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .explanation-item {
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8ecf5;
+        }
+
+        .explanation-item.correct-explanation {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+
+        .explanation-choice {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 5px;
+        }
+
+        .explanation-text {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navigation-hint {
+            margin-top: 30px;
+            text-align: center;
+            color: #667eea;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .key-icon {
+            background: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 2px solid #667eea;
+            font-family: monospace;
+            font-weight: 700;
+        }
+
+        .result-screen {
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .result-icon {
+            font-size: 90px;
+            margin-bottom: 25px;
+        }
+
+        .result-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+
+        .result-score {
+            font-size: 56px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 35px;
+        }
+
+        .result-message {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 35px;
+        }
+
+        .restart-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            border-radius: 35px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .restart-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-card" id="quizCard">
+            <!-- クイズコンテンツがここに表示されます -->
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                "id": 1,
+                "body": "ソフトウェア開発の手法のうち、要件定義、設計、実装、テストの各工程を順番に進めていくモデルはどれか？",
+                "choices": [
+                    {
+                        "text": "アジャイルモデル",
+                        "explanation": "不正解。アジャイルモデルは、短いサイクルで開発を繰り返す手法です。"
+                    },
+                    {
+                        "text": "ウォーターフォールモデル",
+                        "explanation": "正解。ウォーターフォールモデルは、工程を上流から下流へ順番に進める古典的な開発モデルです。"
+                    },
+                    {
+                        "text": "スパイラルモデル",
+                        "explanation": "不正解。スパイラルモデルは、設計とプロトタイピングを繰り返しながら開発を進める手法です。"
+                    },
+                    {
+                        "text": "プロトタイピングモデル",
+                        "explanation": "不正解。プロトタイピングモデルは、試作品を作成してユーザーのフィードバックを得ながら開発を進める手法です。"
+                    }
+                ],
+                "correctChoiceIndex": 1
+            },
+            {
+                "id": 2,
+                "body": "コンピュータの5大装置に含まれないものはどれか？",
+                "choices": [
+                    {
+                        "text": "制御装置",
+                        "explanation": "不正解。制御装置はコンピュータの5大装置の一つです。"
+                    },
+                    {
+                        "text": "演算装置",
+                        "explanation": "不正解。演算装置はコンピュータの5大装置の一つです。"
+                    },
+                    {
+                        "text": "補助記憶装置",
+                        "explanation": "正解。補助記憶装置（HDDやSSDなど）は、主記憶装置と合わせて記憶装置として分類されますが、5大装置の基本的な構成要素としては主記憶装置が挙げられます。"
+                    },
+                    {
+                        "text": "入力装置",
+                        "explanation": "不正解。入力装置はコンピュータの5大装置の一つです。"
+                    }
+                ],
+                "correctChoiceIndex": 2
+            },
+            {
+                "id": 3,
+                "body": "IPアドレスからMACアドレスを取得するために使用されるプロトコルはどれか？",
+                "choices": [
+                    {
+                        "text": "ARP",
+                        "explanation": "正解。ARP (Address Resolution Protocol) は、IPアドレスを元に対応するMACアドレスを問い合わせるためのプロトコルです。"
+                    },
+                    {
+                        "text": "DHCP",
+                        "explanation": "不正解。DHCPは、ネットワークに接続するコンピュータにIPアドレスなどを自動的に割り当てるプロトコルです。"
+                    },
+                    {
+                        "text": "DNS",
+                        "explanation": "不正解。DNSは、ドメイン名とIPアドレスを対応付けるプロトコルです。"
+                    },
+                    {
+                        "text": "HTTP",
+                        "explanation": "不正解。HTTPは、WebサーバとWebクライアント間でデータを送受信するためのプロトコルです。"
+                    }
+                ],
+                "correctChoiceIndex": 0
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let showingAnswer = false;
+
+        function renderQuestion() {
+            const quizCard = document.getElementById('quizCard');
+            const question = quizData[currentQuestionIndex];
+            const progress = ((currentQuestionIndex + 1) / quizData.length) * 100;
+
+            quizCard.innerHTML = `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <div class="question-number">問題 ${currentQuestionIndex + 1} / ${quizData.length}</div>
+                <div class="question">${question.body}</div>
+                <div class="choices" id="choicesContainer">
+                    ${question.choices.map((choice, index) => `
+                        <div class="choice" data-index="${index}">
+                            <div class="choice-text">
+                                <svg class="choice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <circle cx="12" cy="12" r="10" stroke="white"/>
+                                    <path d="M9 12l2 2 4-4" stroke="white"/>
+                                </svg>
+                                ${choice.text}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="explanation-section" id="explanationSection">
+                    <div class="explanation-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4M12 8h.01"/>
+                        </svg>
+                        解説
+                    </div>
+                    ${question.choices.map((choice, index) => `
+                        <div class="explanation-item ${index === question.correctChoiceIndex ? 'correct-explanation' : ''}">
+                            <div class="explanation-choice">${choice.text}</div>
+                            <div class="explanation-text">${choice.explanation}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="navigation-hint">
+                    <span class="key-icon">→</span>
+                    <span id="navigationText">キーを押して解答を表示</span>
+                </div>
+            `;
+
+            showingAnswer = false;
+        }
+
+        function showAnswer() {
+            if (showingAnswer) return;
+            
+            showingAnswer = true;
+            const question = quizData[currentQuestionIndex];
+            const choices = document.querySelectorAll('.choice');
+            const choicesContainer = document.getElementById('choicesContainer');
+            const explanationSection = document.getElementById('explanationSection');
+            const navigationText = document.getElementById('navigationText');
+            
+            // 選択肢のコンテナにクラスを追加
+            choicesContainer.classList.add('answered');
+            
+            // 正解・不正解のクラスを追加
+            choices.forEach((choice, index) => {
+                if (index === question.correctChoiceIndex) {
+                    choice.classList.add('correct');
+                    score++;
+                } else {
+                    choice.classList.add('incorrect');
+                }
+            });
+
+            // 解説を表示
+            setTimeout(() => {
+                explanationSection.classList.add('show');
+                navigationText.textContent = 'キーを押して次の問題へ';
+            }, 300);
+        }
+
+        function nextQuestion() {
+            if (!showingAnswer) {
+                showAnswer();
+            } else {
+                currentQuestionIndex++;
+                
+                if (currentQuestionIndex < quizData.length) {
+                    renderQuestion();
+                } else {
+                    showResult();
+                }
+            }
+        }
+
+        function showResult() {
+            const quizCard = document.getElementById('quizCard');
+            const percentage = Math.round((score / quizData.length) * 100);
+            let emoji, message;
+
+            if (percentage === 100) {
+                emoji = '🎉';
+                message = '完璧です！素晴らしい成績です！';
+            } else if (percentage >= 80) {
+                emoji = '😊';
+                message = 'とても良い成績です！';
+            } else if (percentage >= 60) {
+                emoji = '🙂';
+                message = 'よく頑張りました！';
+            } else {
+                emoji = '💪';
+                message = 'もう一度チャレンジしてみましょう！';
+            }
+
+            quizCard.innerHTML = `
+                <div class="result-screen">
+                    <div class="result-icon">${emoji}</div>
+                    <div class="result-title">クイズ終了！</div>
+                    <div class="result-score">${score} / ${quizData.length}</div>
+                    <div class="result-message">${message}</div>
+                    <button class="restart-button" onclick="restartQuiz()">もう一度挑戦する</button>
+                </div>
+            `;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            renderQuestion();
+        }
+
+        // キーボードイベントの処理
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') {
+                nextQuestion();
+            }
+        });
+
+        // 初期表示
+        renderQuestion();
+    </script>
+</body>
+</html>

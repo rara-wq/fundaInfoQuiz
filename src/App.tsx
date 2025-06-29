@@ -3,46 +3,87 @@ import useQuizStore from './store/quizStore'
 import ChoiceList from './components/ChoiceList'
 import ExplanationPanel from './components/ExplanationPanel'
 import { useKeyboardNav } from './hooks/useKeyboardNav'
+import { useSwipeNav } from './hooks/useSwipeNav'
 import ResultScreen from './components/ResultScreen'
+import type { Chapter } from './types/quiz'
+
+function ChapterSelection({ chapters, onSelectChapter }: { chapters: Chapter[]; onSelectChapter: (id: string) => void }) {
+  return (
+    <div className="chapter-selection">
+      <h1 className="chapter-title">章を選択してください</h1>
+      <div className="chapter-list">
+        {chapters.map((chapter) => (
+          <button key={chapter.id} onClick={() => onSelectChapter(chapter.id)} className="chapter-button">
+            {chapter.title}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 function App() {
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   // キーボードナビゲーションを有効にする
   useKeyboardNav()
+  // スワイプナビゲーションを有効にする
+  useSwipeNav()
+
   const [cardHeight, setCardHeight] = useState<number | 'auto'>('auto')
   const questionViewRef = useRef<HTMLDivElement>(null)
   const explanationViewRef = useRef<HTMLDivElement>(null)
 
   // ストアから必要な状態とアクションを個別に取得する
-  const questions = useQuizStore((state) => state.questions)
-  const currentQuestionIndex = useQuizStore((state) => state.currentQuestionIndex)
-  const loadQuestions = useQuizStore((state) => state.loadQuestions)
-  const isAnswerShown = useQuizStore((state) => state.isAnswerShown)
-  const score = useQuizStore((state) => state.score)
-  const reset = useQuizStore((state) => state.reset)
-  const isQuizFinished = useQuizStore((state) => state.isQuizFinished)
+  const {
+    chapters,
+    questions,
+    currentQuestionIndex,
+    isAnswerShown,
+    score,
+    isQuizFinished,
+    isQuizStarted,
+    loadChapters,
+    selectChapter,
+    reset,
+    backToChapterSelection,
+  } = useQuizStore()
+
+  const loadGlossary = useQuizStore((state) => state.loadGlossary);
 
   // コンポーネントがマウントされた時に一度だけ問題データを読み込む
   useEffect(() => {
-    const fetchQuestions = async () => {
+    const fetchQuizData = async () => {
       try {
-        const response = await fetch('/data/questions.json')
-        if (!response.ok) {
-          throw new Error('ネットワークの応答がありませんでした')
-        }
-        const data = await response.json()
-        loadQuestions(data) // 取得したデータをストアに渡す
-      } catch (error) {
-        console.error('問題の読み込みに失敗しました:', error)
-      }
-    }
+        const [chaptersResponse, glossaryResponse] = await Promise.all([
+          fetch('/data/questions.json'),
+          fetch('/data/words.json'),
+        ]);
 
-    fetchQuestions()
-  }, []) // 依存配列を空にして、マウント時に一度だけ実行
+        if (!chaptersResponse.ok || !glossaryResponse.ok) {
+          throw new Error('ネットワークの応答がありませんでした');
+        }
+
+        const chaptersData = await chaptersResponse.json();
+        const glossaryData = await glossaryResponse.json();
+
+        loadChapters(chaptersData.chapters);
+        loadGlossary(glossaryData);
+      } catch (error) {
+        console.error('データの読み込みに失敗しました:', error);
+      }
+    };
+
+    fetchQuizData();
+  }, [loadChapters, loadGlossary]);
 
   const currentQuestion = questions[currentQuestionIndex]
   const progress = questions.length > 0 ? ((currentQuestionIndex + 1) / questions.length) * 100 : 0
 
   useEffect(() => {
+    if (!isQuizStarted) {
+      setCardHeight('auto');
+      return;
+    }
     const timer = setTimeout(() => {
       const questionHeight = questionViewRef.current?.offsetHeight ?? 0
       const explanationHeight = explanationViewRef.current?.offsetHeight ?? 0
@@ -52,7 +93,7 @@ function App() {
     }, 50) // DOMの更新を待つための短い遅延
 
     return () => clearTimeout(timer)
-  }, [currentQuestion])
+  }, [currentQuestion, isQuizStarted])
 
   return (
     <div className="container">
@@ -69,6 +110,11 @@ function App() {
                 問題 {currentQuestionIndex + 1} / {questions.length}
               </div>
               <div className="question">{currentQuestion.body}</div>
+              {currentQuestion.imageUrl && (
+                <div className="question-image-container">
+                  <img src={currentQuestion.imageUrl} alt="問題の図" className="question-image" />
+                </div>
+              )}
               <div className="choices">
                 <ChoiceList
                   choices={currentQuestion.choices}
@@ -77,8 +123,18 @@ function App() {
                 />
               </div>
               <div className="navigation-hint">
-                <span className="key-icon">→</span>
-                <span>キーを押して解答を表示</span>
+                {isTouchDevice ? (
+                  <>
+                    <span className="key-icon">←</span>
+                    <span>スワイプ</span>
+                    <span className="key-icon">→</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="key-icon">→</span>
+                    <span>キーを押して解答を表示</span>
+                  </>
+                )}
               </div>
             </div>
 
@@ -91,14 +147,30 @@ function App() {
                 問題 {currentQuestionIndex + 1} / {questions.length}
               </div>
               <div className="question">{currentQuestion.body}</div>
+              {currentQuestion.imageUrl && (
+                <div className="question-image-container">
+                  <img src={currentQuestion.imageUrl} alt="問題の図" className="question-image" />
+                </div>
+              )}
               <ExplanationPanel
                 choices={currentQuestion.choices}
                 correctChoiceIndex={currentQuestion.correctChoiceIndex}
                 isAnswerShown={true}
+                question={currentQuestion}
               />
               <div className="navigation-hint">
-                <span className="key-icon">→</span>
-                <span>キーを押して次の問題へ</span>
+                {isTouchDevice ? (
+                  <>
+                    <span className="key-icon">←</span>
+                    <span>スワイプ</span>
+                    <span className="key-icon">→</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="key-icon">→</span>
+                    <span>キーを押して次の問題へ</span>
+                  </>
+                )}
               </div>
             </div>
           </>
@@ -106,10 +178,14 @@ function App() {
       </div>
 
       <div className="quiz-card" id="quizCard" style={{ minHeight: cardHeight }}>
-        {questions.length === 0 ? (
-          <div style={{ textAlign: 'center', color: '#667eea' }}>
-            <p className="text-xl animate-pulse">問題を読み込んでいます...</p>
-          </div>
+        {!isQuizStarted ? (
+          chapters.length > 0 ? (
+            <ChapterSelection chapters={chapters} onSelectChapter={selectChapter} />
+          ) : (
+            <div style={{ textAlign: 'center', color: '#667eea' }}>
+              <p className="text-xl animate-pulse">問題を読み込んでいます...</p>
+            </div>
+          )
         ) : !isQuizFinished && currentQuestion ? (
           <>
             <div className="progress-bar">
@@ -119,6 +195,11 @@ function App() {
               問題 {currentQuestionIndex + 1} / {questions.length}
             </div>
             <div className="question">{currentQuestion.body}</div>
+            {currentQuestion.imageUrl && (
+              <div className="question-image-container">
+                <img src={currentQuestion.imageUrl} alt="問題の図" className="question-image" />
+              </div>
+            )}
             {!isAnswerShown && (
               <div className="choices" id="choicesContainer">
                 <ChoiceList
@@ -132,16 +213,32 @@ function App() {
               choices={currentQuestion.choices}
               correctChoiceIndex={currentQuestion.correctChoiceIndex}
               isAnswerShown={isAnswerShown}
+              question={currentQuestion}
             />
             <div className="navigation-hint">
-              <span className="key-icon">→</span>
-              <span id="navigationText">
-                {isAnswerShown ? 'キーを押して次の問題へ' : 'キーを押して解答を表示'}
-              </span>
+              {isTouchDevice ? (
+                <>
+                  <span className="key-icon">←</span>
+                  <span>スワイプ</span>
+                  <span className="key-icon">→</span>
+                </>
+              ) : (
+                <>
+                  <span className="key-icon">→</span>
+                  <span id="navigationText">
+                    {isAnswerShown ? 'キーを押して次の問題へ' : 'キーを押して解答を表示'}
+                  </span>
+                </>
+              )}
             </div>
           </>
         ) : (
-          <ResultScreen score={score} totalQuestions={questions.length} onReset={reset} />
+          <ResultScreen
+            score={score}
+            totalQuestions={questions.length}
+            onReset={reset}
+            onBackToChapterSelect={backToChapterSelection}
+          />
         )}
       </div>
     </div>
