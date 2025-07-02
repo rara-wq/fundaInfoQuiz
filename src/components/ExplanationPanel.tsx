@@ -23,7 +23,7 @@ function ExplanationPanel({ choices, correctChoiceIndex, isAnswerShown, question
       question.choices.map((c) => c.text).join(' ') +
       ' ' +
       question.choices.map((c) => c.explanation).join(' ');
-
+      
     const foundTerms = Object.keys(glossary).filter((term) =>
       textToScan.includes(term)
     );
