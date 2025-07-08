@@ -32,7 +32,7 @@
     },
     {
       "id": 2,
-      "body": "次のプログラム中の空欄に入れる正しい答えを、解答群の中から選べ。関数 convDecimal は、引数として与えられた、"0"と"1"だけから成る、1文字以上の文字列を、符号なしの2進数と解釈したときの整数値を返す。例えば、引数として"10010"を与えると18が返る。関数 convDecimal が利用する関数 int は、引数で与えられた文字が"0"なら整数値0を返し、"1"なら整数値1を返す。\n\n〔プログラム〕\n○整数型: convDecimal(文字列型: binary)\n  整数型: i, length, result ← 0 \n  length ← binaryの文字数 \n  for (i を 1 から length まで 1 ずつ増やす)\n    result ← ＿＿＿ \n  endfor \n  return result",
+      "body": "次のプログラム中の空欄に入れる正しい答えを、解答群の中から選べ。関数 convDecimal は、引数として与えられた、「0」と「1」だけから成る、1文字以上の文字列を、符号なしの2進数と解釈したときの整数値を返す。例えば、引数として「10010」を与えると18が返る。関数 convDecimal が利用する関数 int は、引数で与えられた文字が「0」なら整数値0を返し、「1」なら整数値1を返す。\n\n〔プログラム〕\n○整数型: convDecimal(文字列型: binary)\n  整数型: i, length, result ← 0 \n  length ← binaryの文字数 \n  for (i を 1 から length まで 1 ずつ増やす)\n    result ← ＿＿＿ \n  endfor \n  return result",
       "choices": [
         {
           "text": "ア: result ＋ int(binary の (length － i ＋ 1)文字目の文字)",
