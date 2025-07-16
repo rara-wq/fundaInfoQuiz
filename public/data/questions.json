@@ -61,14 +61,14 @@
         },
         {
           "text": "ウ: 0.92",
-          "explanation": "不正解。計算が誤っています。"
+          "explanation": "正解。6年後のMTBFは4,600時間、MTTRは400時間。稼働率は MTBF / (MTBF + MTTR) で計算できるので、4,600 / (4,600 + 400) = 0.92 となり、92%です。"
         },
         {
           "text": "エ: 0.94",
-          "explanation": "正解。6年後のMTBFは4,600時間、MTTRは400時間。稼働率は MTBF / (MTBF + MTTR) で計算できるので、4,600 / (4,600 + 400) = 0.92 となり、92%です。"
+          "explanation": "不正解。計算が誤っています。"
         }
       ],
-      "correctChoiceIndex": 3
+      "correctChoiceIndex": 2
     },
     {
       "id": 5,
