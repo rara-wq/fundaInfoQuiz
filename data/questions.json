@@ -49,7 +49,7 @@
     },
     {
       "id": 4,
-      "body": "MTBF は 4,000 時間，MTTR は 1,000 時間の装置がある。今後の 6 年間は，予防保守によって MTBF を前年に比べて毎年 100 時間ずつ改善し，遠隔保守によって MTTR を前年に比べて毎年 100 時間ずつ改善していく計画である。6 年経過後の稼働率は幾らか。",
+      "body": "MTBF は 4,000 時間，MTTR は 1,000 時間の装置がある。\n今後の 6 年間は，予防保守によって MTBF を前年に比べて毎年 100 時間ずつ改善し，遠隔保守によって MTTR を前年に比べて毎年 100 時間ずつ改善していく計画である。6 年経過後の稼働率は幾らか。",
       "choices": [
         {
           "text": "ア: 0.88",
@@ -95,7 +95,7 @@
     },
     {
       "id": 6,
-      "body": "“商品”表に対する SQL 文と同じ結果が得られる SELECT 文はどれか。\n\n| 商品 ID | 商品名称 | 仕入先 ID | 単価 |\n| :---: | :---- | :---: | ----: |\n| S001  | 冷蔵庫  | M001  | 155,000 |\n| S002  | 食器洗い機  | M002  | 85,000 |\n| S003  | 電子レンジ  | M003  | 78,000 |\n| S004  | 炊飯器  | M003  | 32,000 |\n| S005  | コーヒーメーカー  | M004  | 15,000 |\n| S006  | ホットプレート  | M004  | 12,000 |\n\n〔SQL 文〕\nSELECT * FROM 商品 WHERE 仕入先 ID IN ('M002', 'M004')",
+      "body": "“商品”表に対する SQL 文と同じ結果が得られる SELECT 文はどれか。<h4>商品</h4><table><thead><tr><th>商品 ID</th><th>商品名称</th><th>仕入先 ID</th><th>単価</th></tr></thead><tbody><tr><td>S001</td><td>冷蔵庫</td><td>M001</td><td>155,000</td></tr><tr><td>S002</td><td>食器洗い機</td><td>M002</td><td>85,000</td></tr><tr><td>S003</td><td>電子レンジ</td><td>M003</td><td>78,000</td></tr><tr><td>S004</td><td>炊飯器</td><td>M003</td><td>32,000</td></tr><tr><td>S005</td><td>コーヒーメーカー</td><td>M004</td><td>15,000</td></tr><tr><td>S006</td><td>ホットプレート</td><td>M004</td><td>12,000</td></tr></tbody></table>\n\n〔SQL 文〕\nSELECT * FROM 商品 WHERE 仕入先 ID IN ('M002', 'M004')",
       "choices": [
         {
           "text": "ア: SELECT * FROM 商品 WHERE 仕入先 ID = 'M002' AND 仕入先 ID = 'M004'",
@@ -118,7 +118,7 @@
     },
     {
       "id": 7,
-      "body": "1G バイトの動画データを 40M ビット／秒の回線を使用してダウンロードしたところ，5 分掛かった。このときの回線利用率はおよそ何％か。",
+      "body": "1G バイトの動画データを 40M ビット／秒の回線を使用してダウンロードしたところ，5 分掛かった。このときの回線利用率はおよそ何％か。\nここで，ダウンロード時には動画データに 20％の制御情報が付加されるものとする。",
       "choices": [
         {
           "text": "ア: 10",
@@ -130,14 +130,14 @@
         },
         {
           "text": "ウ: 67",
-          "explanation": "正解。1Gバイトの動画データは8,000Mビットに相当します。40Mビット/秒の回線で5分（300秒）間ダウンロードした場合、理論最大転送量は12,000Mビットです。したがって、回線利用率は8,000Mビットを12,000Mビットで割った値に100を掛けた67%となります。"
+          "explanation": "不正解。計算が誤っています。"
         },
         {
           "text": "エ: 80",
-          "explanation": "不正解。計算が誤っています。"
+          "explanation": "正解。1Gバイト（8,000Mビット）の動画データに加え、その20%（1,600Mビット）の制御情報も送られたため、実際に転送されたデータ総量は 8,000+1,600=9,600Mビットです。40Mビット/秒の回線で5分（300秒）間の最大転送量は、40×300=12,000Mビットです。実際に転送された量（9,600Mビット）を最大転送量（12,000Mビット）で割ると、0.8 となります。これをパーセンテージにすると、0.8×100=80% です。"
         }
       ],
-      "correctChoiceIndex": 2
+      "correctChoiceIndex": 3
     },
     {
       "id": 8,
@@ -172,18 +172,18 @@
         },
         {
           "text": "イ: ある暗号アルゴリズムの秘密鍵が不正アクセスによって漏えいした。",
-          "explanation": "正解。秘密鍵の漏えいは暗号の危殆化に該当します。"
+          "explanation": "正解。これは暗号アルゴリズム自体の問題ではなく、運用上のセキュリティ管理の不備による情報漏えいです。"
         },
         {
           "text": "ウ: あるハッシュ関数においてハッシュ値が同じになるデータの組みを現実的な時間内で発見する方法が見つかった。",
-          "explanation": "不正解。これはハッシュ関数の衝突耐性の問題です。"
+          "explanation": "正解。「ハッシュ値が同じになる異なるデータの組み合わせ」を現実的な時間で見つけられる方法が見つかってしまうと、攻撃者はこの特性を悪用して、正当なデータと同じハッシュ値を持つ別のデータ（例えば悪意のあるデータ）を作成し、あたかも正当なデータであるかのように見せかけることが可能になってしまいます。これは、ハッシュ関数の根幹をなすセキュリティ特性が失われたことを意味します。つまり「危殆化した」状態になります。"
         },
         {
           "text": "エ: あるランサムウェアの一種で暗号化されたファイルの復号鍵が公開された。",
-          "explanation": "不正解。これはランサムウェアの問題です。"
+          "explanation": "不正解。これはランサムウェアの攻撃者が何らかの理由で復号鍵を公開したという状況であり、暗号技術が破られたわけではありません。"
         }
       ],
-      "correctChoiceIndex": 1
+      "correctChoiceIndex": 2
     },
     {
       "id": 10,
@@ -371,7 +371,7 @@
     },
     {
       "id": 19,
-      "body": "表の条件で喫茶店を開業したい。月 10 万円の利益を出すためには，1 客席当たり 1 日平均何人の客が必要か。\n\n| 客 1 人当たりの売上高  | 500 円 |\n| 客 1 人当たりの変動費  | 100 円 |\n| 固定費  | 300,000 円／月 |\n| 1 か月の営業日数  | 20 日 |\n| 客席数  | 10 席 |",
+      "body": "表の条件で喫茶店を開業したい。月 10 万円の利益を出すためには，1 客席当たり 1 日平均何人の客が必要か。<style>table{width:100%;max-width:100%;border-collapse:collapse;margin:20px 0;font-family:sans-serif;box-sizing:border-box;}th,td{border:1px solid #ddd;padding:8px;text-align:center;}th{background-color:transparent;text-align:center;}</style><table><thead><tr><th>客 1 人当たりの売上高</th><th>500 円</th></tr></thead><tbody><tr><td>客 1 人当たりの変動費</td><td>100 円</td></tr><tr><td>固定費</td><td>300,000 円／月</td></tr><tr><td>1 か月の営業日数</td><td>20 日</td></tr><tr><td>客席数</td><td>10 席</td></tr></tbody></table>",
       "choices": [
         {
           "text": "ア: 3.75",
@@ -420,7 +420,7 @@
   [
     {
              "id": 1,
-             "body": "次のプログラム中の（　　a　　）と（　　b　　）に入れる正しい答えの組合せを解答群の中から選べ。\n関数 function1 が受け取る引数と，関数 function2 が受け取る引数とが同じとき， 二つの関数は同じ値を返す。ここで，引数 n と引数 m は正の整数であり，引数 m は引数 n よりも 10 以上大きい数とする。\n\n〔プログラム〕 \n○整数型: function1(整数型: n, 整数型: m) \n 整数型: count ← 0 \n 整数型: i \n for (iをnからmまで1ずつ増やす) \n if ((i mod 4)が0と等しい) \n count ← count ＋ 1 \n endif \nendfor \nreturn count \n\n○整数型: function2(整数型: n, 整数型: m) \n 整数型: count ← 0 \n 整数型: tempN ← n \n 整数型: i, j \n for (　　a　　)   \na \n if ((tempN mod 4)が0と等しい) \n 繰返し処理を終了する \n endif \n tempN ← tempN ＋ 1 \n endfor \nfor (　　b　　)  \nb \n count ← count ＋ 1 \nendfor \nreturn count",
+             "body": "次のプログラム中の（　　a　　）と（　　b　　）に入れる正しい答えの組合せを解答群の中から選べ。\n関数 function1 が受け取る引数と，関数 function2 が受け取る引数とが同じとき， 二つの関数は同じ値を返す。ここで，引数 n と引数 m は正の整数であり，引数 m は引数 n よりも 10 以上大きい数とする。\n\n〔プログラム〕 \n○整数型: function1(整数型: n, 整数型: m) \n 整数型: count ← 0 \n 整数型: i \n for (iをnからmまで1ずつ増やす) \n if ((i mod 4)が0と等しい) \n count ← count ＋ 1 \n endif \nendfor \nreturn count \n\n○整数型: function2(整数型: n, 整数型: m) \n 整数型: count ← 0 \n 整数型: tempN ← n \n 整数型: i, j \n for (　　a　　)   \n if ((tempN mod 4)が0と等しい) \n 繰返し処理を終了する \n endif \n tempN ← tempN ＋ 1 \n endfor \n for (　　b　　)  \n count ← count ＋ 1 \n endfor \n return count",
              "choices": [
                {
                  "text": "ア: a: iを1から2まで1ずつ増やす , b: jをnから始めてmを超えない範囲でtempNずつ増やす",
@@ -451,7 +451,7 @@
            },
            {
              "id": 2,
-             "body": "次のプログラム中の(　　　　)に入れる正しい答えを，解答群の中から選べ。\n関数 change は，10 より大きい整数を引数 n で受け取り，1 円玉，5 円玉，10 円玉 を使ってちょうど n 円にする組合せの総数を返す。 \n例えば，12 円にする組合せは，次のように数えられる。10 円玉を使わない場合に は，1 円玉と 5 円玉だけでちょうど 12 円にすることになる。その組合せは，使える 5 円玉の枚数が 0 以上 (12 ÷ 5 の商) 以下なので，(12 ÷ 5 の商) ＋ 1 ＝ 3 通りあ る。同様に，10 円玉を 1 枚使う場合には，1 円玉と 5 円玉だけでちょうど 2 円にする ことになり，その組合せは (2 ÷ 5 の商) ＋ 1 ＝ 1 通りある。10 円玉を 2 枚以上 使う組合せはない。よって，1 円玉，5 円玉，10 円玉を使ってちょうど 12 円にする 組合せは，3 ＋ 1 ＝ 4 通りである。 \n\n〔プログラム〕 \n○整数型: change(整数型: n) \n 整数型: count ← 0 \n 整数型: rest ← n \n while (　　　　) \n  count ← count ＋ (rest ÷ 5 の商) ＋ 1 \n  rest ← rest － 10 \n endwhile \n return count",
+             "body": "次のプログラム中の(　　　　)に入れる正しい答えを，解答群の中から選べ。\n関数 change は，10 より大きい整数を引数 n で受け取り，1 円玉，5 円玉，10 円玉 を使ってちょうど n 円にする組合せの総数を返す。 \n例えば，12 円にする組合せは，次のように数えられる。10 円玉を使わない場合に は，1 円玉と 5 円玉だけでちょうど 12 円にすることになる。\nその組合せは，使える 5 円玉の枚数が 0 以上 (12 ÷ 5 の商) 以下なので，(12 ÷ 5 の商) ＋ 1 ＝ 3 通りある。\n同様に，10 円玉を 1 枚使う場合には，1 円玉と 5 円玉だけでちょうど 2 円にする ことになり，その組合せは (2 ÷ 5 の商) ＋ 1 ＝ 1 通りある。\n10 円玉を 2 枚以上 使う組合せはない。\nよって，1 円玉，5 円玉，10 円玉を使ってちょうど 12 円にする 組合せは，3 ＋ 1 ＝ 4 通りである。 \n\n〔プログラム〕 \n○整数型: change(整数型: n) \n 整数型: count ← 0 \n 整数型: rest ← n \n while (　　　　) \n  count ← count ＋ (rest ÷ 5 の商) ＋ 1 \n  rest ← rest － 10 \n endwhile \n return count",
              "choices": [
                {
                  "text": "ア: rest ≧ 0",
@@ -482,7 +482,7 @@
            },
            {
              "id": 3,
-             "body": "次のプログラム中の(　　a　　)と(　　b　　)に入れる正しい答えを，解答群の中から選べ。ここで，配列の要素番号は 1 から始まる。\n関数 push は，引数で与えられた整数をスタックに格納する。格納できた場合は true を返し，格納できなかった場合は false を返す。 \n関数 pop は，スタックから値を取り出して返す。スタックが空のときは未定義の値 を返す。 \nスタックを，要素数が 4 である大域の整数型の配列 stack，及び次に値を格納する 位置を示す大域の変数 stackPos で表現する。スタックの初期状態を図に示す。 プログラムでは，配列の領域外を参照してはならないものとする。\n\n| 要素番号  | 1  | 2  | 3  | 4 |\n| 　stack 　| 4  | 3  |    |   |\n  　      　            ↑      \n       　　　　　　  stackPos    \n 注記 網掛けはその要素が未定義であることを示す。 \n 図 スタックの初期状態 \n\n〔プログラム〕 \n大域: 整数型: stackPos ← 3 \n大域: 整数型の配列: stack ← {4, 3, 未定義の値, 未定義の値} \n\n○論理型: push(整数型: inputData) \n if (stackPos ≦ stackの要素数) \n stack[(　　a　　)] ← inputData   \n stackPos ← stackPos ＋ 1 \n return true \nelse \n return false \n endif \n\n○整数型: pop() \n 整数型: popData ← 未定義の値 \n if (stackPos ＞ 1) \n stackPos ←（　　b　　） \n popData ← stack[stackPos]  \n stack[stackPos] ← 未定義の値 \nendif \n return popData",
+             "body": "次のプログラム中の(　　a　　)と(　　b　　)に入れる正しい答えを，解答群の中から選べ。ここで，配列の要素番号は 1 から始まる。\n関数 push は，引数で与えられた整数をスタックに格納する。格納できた場合は true を返し，格納できなかった場合は false を返す。 \n関数 pop は，スタックから値を取り出して返す。スタックが空のときは未定義の値 を返す。 \nスタックを，要素数が 4 である大域の整数型の配列 stack，及び次に値を格納する 位置を示す大域の変数 stackPos で表現する。スタックの初期状態を図に示す。 \nプログラムでは，配列の領域外を参照してはならないものとする。<style>table{width:60%;border-collapse:collapse;margin:20px auto;font-family:monospace;border:1px solid black;}th,td{border:1px solid black;padding:8px;text-align:center;}th{background-color:white;}.data-cell{border:1px solid black;background-color:white;}.gray-cell{background-color:#f0f0f0;}.stack-label{text-align:center;margin-top:5px;}.arrow{display:block;text-align:center;margin-top:5px;}</style><table><thead><tr><th>要素番号</th><th class=\"data-cell\">1</th><th class=\"data-cell\">2</th><th class=\"data-cell\">3</th><th class=\"data-cell\">4</th></tr></thead><tbody><tr><td style=\"background-color:white;\">stack</td><td class=\"data-cell\">4</td><td class=\"data-cell\">3</td><td class=\"gray-cell\"></td><td class=\"gray-cell\"></td></tr></tbody></table><div class=\"stack-label\"><span class=\"arrow\">　　　　　　　　　↑</span><span>　　　　　　　　　stackPos</span></div><div style=\"text-align:center;margin-top:10px;font-size:0.9em;\">注記 網掛けはその要素が未定義であることを示す。<br>図 スタックの初期状態</div> \n\n〔プログラム〕 \n大域: 整数型: stackPos ← 3 \n大域: 整数型の配列: stack ← {4, 3, 未定義の値, 未定義の値} \n\n○論理型: push(整数型: inputData) \n if (stackPos ≦ stackの要素数) \n stack[(　　a　　)] ← inputData   \n stackPos ← stackPos ＋ 1 \n return true \n else \n return false \n endif \n\n○整数型: pop() \n 整数型: popData ← 未定義の値 \n if (stackPos ＞ 1) \n stackPos ←（　　b　　） \n popData ← stack[stackPos]  \n stack[stackPos] ← 未定義の値 \n endif \n return popData",
              "choices": [
                {
                  "text": "ア: a: stackPos, b: stackPos ＋ 1",
@@ -587,7 +587,7 @@
            },
            {
              "id": 6,
-             "body": "A 社は従業員 200 名の電子機器メーカーである。東京に本社があり，新潟に工場がある。 \nA 社では，ファイルサーバを「　　」のように運用している。\n\n「・ファイルサーバは本社と工場のサーバルームに設置している。\n・ファイルサーバは，磁気テープを使用してファイルのバックアップを取得している。\n・土曜日の午前 2 時からフルバックアップを取得し，翌週の火曜日と木曜日の午前 2 時から増分バックアップを取得している。\n・情報システム部の担当者は毎週月曜日，火曜日，木曜日の朝 10 時頃，バックアップジョブの実行結果の確認と磁気テープの交換を行い，磁気テープは耐火金庫に保管している。\n・磁気テープには上書きモードでバックアップを取得し，1 か月分の磁気テープを世代管理している。\n・これまで，フルバックアップからのリストアには平均して 4 時間，1 回の増分バックアップからは平均して 0.25 時間掛かっている。\n・A 社は ICT 継続のための試験を実施しており，ファイルサーバも試験対象である。」\n注記 事業影響度分析の結果に基づき，ファイルサーバは，72 時間の目標復旧時点（RPO）と120 時間の目標復旧時間(RTO)が要求事項として定められている。\n\nA 社は ISMS 認証を取得しており，最高情報セキュリティ責任者（CISO）を中心に 情報セキュリティに取り組み，定期的に，情報セキュリティリスクアセスメントを行っている。今般，ISMS 認証基準が JIS Q 27001:2023 に改正されたことを受け，情報セキュリティリーダーの B さんは，新基準への移行審査に向けて準備することになった。改正によって新たに追加された情報セキュリティ管理策について，B さんは情報 システム部の担当者に取組状況を確認し，その評価結果を表 1 にまとめた。\n\n　　　　　　　　　表 1 B さんの評価結果（抜粋） \n| 項番  | 　　　　情報セキュリティ管理策　　　  |　  評価結果  　|\n|　 1   |(事業継続のための ICT の備え）事業継続 |  実施している  |\n|　     |の目的及び ICT 継続の 要求事項に基づい |　 　　　　　　 |\n|　     |いて，ICT の備えを計画し,実施し,維持し,|　 　　　　　　 |\n|　     |試験しなければならない。　　　　　　　 |　 　　　　　　 |\n\nB さんは，移行審査前の内部監査で，内部監査室から表 1 の項番 1 に関するファイルサーバの運用について何点か質問を受け，表 2 のとおり回答した。\n\n　　　　　　　表 2 内部監査室への B さんの回答（抜粋） \n| 項番  |　　　　　　 　　　　 B さんの回答　　　  　　　　　　　|\n|   1   |例えば，金曜日の正午に障害が発生した場合，少なくとも    |\n|       |(a1)の時点のデータは復元しなければならない。 　　　　 　|\n|   2   |例えば，木曜日の正午に障害が発生し，ファイルサーバの全デ|\n|       |ータが消失したとすると，バックアップからのリストアには  |\n|       |(a2)時間掛かると予想される。 　　　　　　　　　　　　　 |\n|   3   |ICT 継続の計画書は，(a3)が承認している。　　　　　　  　|\n\n設問 表 2 中の(a1)～(a3)に入れる字句の適切な組合せを，a に関する解答群の中から選べ。",
+             "body": "A 社は従業員 200 名の電子機器メーカーである。東京に本社があり，新潟に工場がある。 \nA 社では，ファイルサーバを図 1のように運用している。\n\n<p style=\"border: 1px solid black; padding: 10px; white-space: normal;\">・ファイルサーバは本社と工場のサーバルームに設置している。<br>・ファイルサーバは，磁気テープを使用してファイルのバックアップを取得している。<br>・土曜日の午前 2 時からフルバックアップを取得し，翌週の火曜日と木曜日の午前 2 時から増分バックアップを取得している。<br>・情報システム部の担当者は毎週月曜日，火曜日，木曜日 の朝 10 時頃，バックアップジョブの実行結果の確認と磁気テープの交換を行い，磁気テープは耐火金庫に保管している。<br>・磁気テープには上書きモードでバックアップを取得し，1 か月分の磁気テープを世代管理している。<br>・これまで，フルバックアップからのリストアには平均して 4 時間，1 回の増分バックアップからは平均して 0.25 時間掛かっている。<br>・A 社は ICT 継続のための試験を実施しており，ファイルサーバも試験対象である。</p>注記 事業影響度分析の結果に基づき，ファイルサーバは，72 時間の目標復旧時点（RPO）と120 時間の目標復旧時間(RTO)が要求事項として定められている。<p style=\"text-align: center;\">図 1 A 社のファイルサーバの運用</p>\n\nA 社は ISMS 認証を取得しており，最高情報セキュリティ責任者（CISO）を中心に 情報セキュリティに取り組み，定期的に，情報セキュリティリスクアセスメントを行っている。今般，ISMS 認証基準が JIS Q 27001:2023 に改正されたことを受け，情報セキュリティリーダーの B さんは，新基準への移行審査に向けて準備することになった。改正によって新たに追加された情報セキュリティ管理策について，B さんは情報 システム部の担当者に取組状況を確認し，その評価結果を表 1 にまとめた。\n\n<!DOCTYPE html><html lang=\"ja\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>情報セキュリティ管理策と回答</title><style>table{width:100%;border-collapse:collapse;margin:20px auto;font-family:sans-serif;background-color:white;}th,td{border:1px solid black;padding:8px;vertical-align:top;text-align:left;}th{background-color:white;text-align:center;}.table-title{text-align:center;font-weight:bold;margin-bottom:10px;}.align-center{text-align:center;}.align-left{text-align:left;}</style></head><body><p class=\"table-title\">表 1 B さんの評価結果（抜粋）</p><table><thead><tr><th class=\"align-center\"style=\"width: 20%;\">項番</th><th class=\"align-center\"style=\"width: 60%;\">情報セキュリティ管理策</th><th class=\"align-center\"style=\"width: 20%;\">評価結果</th></tr></thead><tbody><tr><td class=\"align-center\">1</td><td>（事業継続のための ICT の備え）事業継続の目的及び ICT 継続の 要求事項に基づいて，ICT の備えを計画し,実施し,維持し,試験しなければならない。</td><td class=\"align-center\">実施している</td></tr></tbody></table></body></html>B さんは，移行審査前の内部監査で，内部監査室から表 1 の項番 1 に関するファイルサーバの運用について何点か質問を受け，表 2 のとおり回答した。\n\n<p class=\"table-title\">表 2 内部監査室への B さんの回答（抜粋）</p><table><thead><tr><th class=\"align-center\" style=\"width: 20%;\">項番</th><th class=\"align-center\" style=\"width: 80%;\">B さんの回答</th></tr></thead><tbody><tr><td class=\"align-center\">1</td><td>例えば，金曜日の正午に障害が発生した場合，少なくとも<br>(　a1　)の時点のデータは復元しなければならない。</td></tr><tr><td class=\"align-center\">2</td><td>例えば，木曜日の正午に障害が発生し，ファイルサーバの全データが消失したとすると，バックアップからのリストアには<br>(　a2　)時間掛かると予想される。</td></tr><tr><td class=\"align-center\">3</td><td>ICT 継続の計画書は，(　a3　)が承認している。</td></tr></tbody></table><style>table{width:80%;border-collapse:collapse;margin:20px auto;font-family:sans-serif;background-color:white;}th,td{border:1px solid black;padding:8px;vertical-align:top;text-align:left;}th{background-color:white;text-align:center;}.table-title{text-align:center;font-weight:bold;margin-bottom:10px;}.align-center{text-align:center;}.align-left{text-align:left;}</style>\n\n設問 表 2 中の(　a1　)～(　a3　)に入れる字句の適切な組合せを，a に関する解答群の中から選べ。",
              "choices": [
                {
                  "text": "ア: a1: 月曜日の正午, a2: 4.25, a3: CISO",
