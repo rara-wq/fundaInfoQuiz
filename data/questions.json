@@ -1171,26 +1171,26 @@
   },
   {
     "id": 2,
-    "body": "双方向のポインタをもつリスト構造のデータを表に示す。この表において新たな社員 G を社員 A と社員 K の間に追加する。追加後の表のポインタ a ～ f の中で追加前と比べて値が変わるポインタだけを全て列記したものはどれか。\n\n| アドレス  | 社員名  | 次ポインタ  | 前ポインタ |\n| :---: | :---: | :---: | :---: |\n| 100  | 社員 A  | 300 |  0 |\n| 200  | 社員 T |  0  | 300 |\n| 300  | 社員 K  | 200  | 100 |\n\n追加後の表\n\n| アドレス  | 社員名  | 次ポインタ  | 前ポインタ |\n| :---: | :---: | :---: | :---: |\n| 100  | 社員 A  | a  | b |\n| 200  | 社員 T  | c  | d |\n| 300  | 社員 K  | e  | f |\n| 400  | 社員 G  | x  | y |",
+    "body": "双方向のポインタをもつリスト構造のデータを表に示す。この表において新たな社員 G を社員 A と社員 K の間に追加する。追加後の表のポインタ a ～ f の中で追加前と比べて値が変わるポインタだけを全て列記したものはどれか。\n\n<P>表</P><div style=\"display: flex; flex-direction: column; align-items: center;max-height: 60%;\"><p class=\"question-text\"><table><thead><tr><th>アドレス</th><th>社員名</th><th>次ポインタ</th><th>前ポインタ</th></tr></thead><tbody><tr><td>100</td><td>社員 A</td><td>300</td><td>0</td></tr><tr><td>200</td><td>社員 T</td><td>0</td><td>300</td></tr><tr><td>300</td><td>社員 K</td><td>200</td><td>100</td></tr></tbody></table></div>\n\n\n<P>追加後の表</P><div style=\"overflow-x: auto; max-width: 100%;\"><table><thead><tr><th>アドレス</th><th>社員名</th><th>次ポインタ</th><th>前ポインタ</th></tr></thead><tbody><tr><td>100</td><td>社員 A</td><td>a</td><td>b</td></tr><tr><td>200</td><td>社員 T</td><td>c</td><td>d</td></tr><tr><td>300</td><td>社員 K</td><td>e</td><td>f</td></tr><tr><td>400</td><td>社員 G</td><td>x</td><td>y</td></tr></tbody></tbody></table>",
     "choices": [
       {
         "text": "ア: a，b，e，f",
-        "explanation": "不正解。bのポインタは変わりません。"
+        "explanation": "不正解。b, eのポインタは変わりません。"
       },
       {
         "text": "イ: a，e，f",
-        "explanation": "正解。社員Gを追加することで、a, e, fのポインタが変わります。"
+        "explanation": "不正解。eのポインタは変わりません。"
       },
       {
         "text": "ウ: a，f",
-        "explanation": "不正解。eのポインタも変わります。"
+        "explanation": "正解。社員Gの追加後、社員Aのすぐ次に社員Gが来ます。そのため、社員Aの次ポインタ（a）は社員Gのアドレス（400）を指すように変更されます。社員Kのすぐ前に社員Gが来ます。そのため、社員Kの前ポインタ（f）は社員Gのアドレス（400）を指すように変更されます。"
       },
       {
         "text": "エ: b，e",
-        "explanation": "不正解。aのポインタも変わります。bのポインタは変わりません。"
+        "explanation": "不正解。b, eのポインタは変わりません。"
       }
     ],
-    "correctChoiceIndex": 1
+    "correctChoiceIndex": 2
   },
   {
     "id": 3,
@@ -1244,11 +1244,11 @@
     "choices": [
       {
         "text": "ア: CG 映像作成における最終段階として，物体のデータをディスプレイに描画できるように映像化する処理である。",
-        "explanation": "不正解。CG 映像作成の最終段階ではありません。"
+        "explanation": "不正解。クリッピングはCG 映像作成の最終段階ではありません。"
       },
       {
         "text": "イ: 画像表示領域にウィンドウを定義し，ウィンドウの外側を除去し，内側の見える部分だけを取り出す処理である。",
-        "explanation": "正解。クリッピングは、ウィンドウの外側を除去し、内側の見える部分だけを取り出す処理です。"
+        "explanation": "正解。クリッピングはウィンドウの外側を除去し、内側の見える部分だけを取り出す処理です。"
       },
       {
         "text": "ウ: スクリーンの画素数が有限であるために図形の境界近くに生じる，階段状のギザギザを目立たなくする処理である。",
@@ -1367,7 +1367,7 @@
       },
       {
         "text": "ウ: デイリースクラム",
-        "explanation": "正解。デイリースクラムは、毎日行われる短時間のミーティングで、進捗を確認し、計画を調整します。"
+        "explanation": "正解。デイリースクラムは毎日行われる短時間のミーティングで、進捗を確認し、計画を調整します。"
       },
       {
         "text": "エ: レトロスペクティブ",
@@ -1543,30 +1543,30 @@
 [
   {
     "id": 1,
-    "body": "次のプログラム中の「　a　」と「　b　」に入れる正しい答えの組合せを，解答群の中から選べ。ここで，配列の要素番号は 1 から始まる。\n関数 findPrimeNumbers は，引数で与えられた整数以下の，全ての素数だけを格納した配列を返す関数である。ここで，引数に与える整数は 2 以上である。\n\n【プログラム】\n○整数型の配列: findPrimeNumbers(整数型: maxNum)\n 整数型の配列: pnList ← {} // 要素数0の配列\n 整数型: i, j\n 論理型: divideFlag\n for (i を 2 から　 a 　 まで 1 ずつ増やす)\n divideFlag ← true\n\n 「iの正の平方根の整数部分が2未満のときは，繰返し処理を実行しない」\n for (j を 2 から iの正の平方根の整数部分 まで 1 ずつ増やす) // α  if ( 　b 　)\n divideFlag ← false\n αの行から始まる繰返し処理を終了する\n endif\n endfor\n if (divideFlag が true と等しい)\n pnListの末尾 に iの値 を追加する\n endif\n endfor\n return pnList",
+    "body": "次のプログラム中の(　a　)と(　b　)に入れる正しい答えの組合せを，解答群の中から選べ。ここで，配列の要素番号は 1 から始まる。\n関数 findPrimeNumbers は，引数で与えられた整数以下の，全ての素数だけを格納した配列を返す関数である。ここで，引数に与える整数は 2 以上である。\n\n【プログラム】\n○整数型の配列: findPrimeNumbers(整数型: maxNum)\n 整数型の配列: pnList ← {} // 要素数0の配列\n 整数型: i, j\n 論理型: divideFlag\n for (i を 2 から　 a 　 まで 1 ずつ増やす)\n 　divideFlag ← true\n\n 　/*iの正の平方根の整数部分が2未満のときは，繰返し処理を実行しない */\n 　for (j を 2 から iの正の平方根の整数部分 まで 1 ずつ増やす) // α \n 　　if ( 　b 　)\n 　　　　divideFlag ← false\n 　　　　αの行から始まる繰返し処理を終了する\n 　　endif\n 　endfor\n 　if (divideFlag が true と等しい)\n 　　pnListの末尾 に iの値 を追加する\n 　endif\n endfor\n return pnList",
     "choices": [
       {
-        "text": "ア: a 「maxNum」 / b 「i ÷ j の余り が 0 と等しい」",
-        "explanation": "不正解。i ÷ j の余りが 0 であることは、i が j で割り切れることを意味しますが、設問の文脈では正しい答えではありません。"
+        "text": "ア: a 「maxNum」 , b 「i ÷ j の余り が 0 と等しい」",
+        "explanation": "正解。プログラムの目的が「maxNum以下の素数をすべて見つける」ことだから、i は2からmaxNumまでチェックする必要があります。ある数iが素数でないと判断されるのは、2からiの平方根までのいずれかの数jで割り切れる（余りが0になる）場合だからです。divideFlagがfalseになるのは、この「割り切れた」瞬間です。"
       },
       {
-        "text": "イ: a 「maxNum」 / b 「i ÷ j の商 が 1 と等しくない」",
-        "explanation": "不正解。i ÷ j の商が 1 と等しくないことは、i が j より大きいことを意味しますが、設問の文脈では正しい答えではありません。"
+        "text": "イ: a 「maxNum」 , b 「i ÷ j の商 が 1 と等しくない」",
+        "explanation": "不正解。「i ÷ j の商が 1 と等しくない」ことは、割り切れることと関係なく、素数判定の条件として不適切だからです。"
       },
       {
-        "text": "ウ: a 「maxNum ＋ 1」 / b 「i ÷ j の余り が 0 と等しい」",
-        "explanation": "不正解。maxNum + 1 は、maxNum よりも 1 大きい数を意味しますが、設問の文脈では正しい答えではありません。"
+        "text": "ウ: a 「maxNum ＋ 1」 , b 「i ÷ j の余り が 0 と等しい」",
+        "explanation": "不正解。「maxNum + 1」は問題の要件「maxNum以下の素数」という条件を越えてしまうので不正解です。"
       },
       {
-        "text": "エ: a 「maxNum ＋ 1」 / b 「i ÷ j の商 が 1 と等しくない」",
-        "explanation": "正解。maxNum + 1 は、maxNum よりも 1 大きい数を意味し、i ÷ j の商が 1 と等しくないことは、i が j より大きいことを意味します。設問の文脈では正しい答えです。"
+        "text": "エ: a 「maxNum ＋ 1」 , b 「i ÷ j の商 が 1 と等しくない」",
+        "explanation": "不正解。maxNum + 1 は、範囲外であり、「商が1と等しくない」は素数判定の条件として間違っているからです。"
       }
     ],
-    "correctChoiceIndex": 3
+    "correctChoiceIndex": 0
   },
   {
     "id": 2,
-    "body": "次の記述中の「　　　」に入れる正しい答えを，解答群の中から選べ。\n次のプログラムにおいて，手続 proc2 を呼び出すと，「　　　」の順に出力される。\n\n【プログラム】\n○ proc1()\n　\"A\" を出力する\n　proc3()\n\n○ proc2()\n　proc3()\n　\"B\" を出力する\n　proc1()\n\n○ proc3()\n　\"C\" を出力する",
+    "body": "次の記述中の(　　　)に入れる正しい答えを，解答群の中から選べ。\n\n次のプログラムにおいて，手続 proc2 を呼び出すと，(　　　)の順に出力される。\n\n【プログラム】\n○ proc1()\n　\"A\" を出力する\n　proc3()\n\n○ proc2()\n　proc3()\n　\"B\" を出力する\n　proc1()\n\n○ proc3()\n　\"C\" を出力する",
     "choices": [
       {
         "text": "ア: \"A\"，\"B\"， \"B\"，\"C\"",
@@ -1578,7 +1578,7 @@
       },
       {
         "text": "ウ: \"A\"，\"C\"，\"B\"，\"C\"",
-        "explanation": "正解。手続 proc2 の実行結果として正しい順序です。"
+        "explanation": "不正解。出力の順序が異なります。"
       },
       {
         "text": "エ: \"B\"，\"A\"，\"B\"，\"C\"",
@@ -1598,14 +1598,14 @@
       },
       {
         "text": "ク: \"C\"，\"B\"，\"A\"，\"C\"",
-        "explanation": "不正解。出力の順序が異なります。"
+        "explanation": "正解。proc2からproc3→\"C\"、次に\"B\"、そしてproc1から\"A\"、最後にproc3から\"C\"と、順に実行されるためです。"
       }
     ],
-    "correctChoiceIndex": 2
+    "correctChoiceIndex": 7
   },
   {
     "id": 3,
-    "body": "次の記述中の「　　　」に入れる正しい答えを，解答群の中から選べ。ここで，配列の要素番号は 1 から始まる。\n次の手続 sort は，大域の整数型の配列 data の，引数 first で与えられた要素番号から引数 last で与えられた要素番号までの要素を昇順に整列する。\nここで，first ＜ last とする。手続 sort を sort(1, 5) として呼び出すと，/*** α ***/ の行を最初に実行したときの出力は「　　　」となる。\n\n〔プログラム〕\n大域: 整数型の配列: data ← {2, 1, 3, 5, 4}\n○sort(整数型: first, 整数型: last)\n 整数型: pivot, i, j\n pivot ← data[(first ＋ last) ÷ 2 の商]\n i ← first\n j ← last\n while (true)\n while (data[i] ＜ pivot)\n i ← i ＋ 1\n endwhile\n while (pivot ＜ data[j])\n j ← j － 1\n endwhile\n if (i ≧ j)\n 繰返し処理を終了する\n endif\n data[i]とdata[j]の値を入れ替える\n i ← i ＋ 1\n j ← j － 1\n endwhile\ndataの全要素の値を要素番号の順に空白区切りで出力する /*** α ***/\n if (first ＜ i － 1)\n sort(first, i － 1)\n endif\n if (j ＋ 1 ＜ last)\n sort(j ＋ 1, last)\n endif",
+    "body": "次の記述中の(　　　)に入れる正しい答えを，解答群の中から選べ。ここで，配列の要素番号は 1 から始まる。\n\n次の手続 sort は，大域の整数型の配列 data の，引数 first で与えられた要素番号から引数 last で与えられた要素番号までの要素を昇順に整列する。\nここで，first ＜ last とする。手続 sort を sort(1, 5) として呼び出すと，/*** α ***/ の行を最初に実行したときの出力は(　　　)となる。\n\n〔プログラム〕\n大域: 整数型の配列: data ← {2, 1, 3, 5, 4}\n\n○sort(整数型: first, 整数型: last)\n　整数型: pivot, i, j\n　pivot ← data[(first ＋ last) ÷ 2 の商]\n　i ← first\n　j ← last\n\n　while (true)\n　　while (data[i] ＜ pivot)\n　　　i ← i ＋ 1\n　　endwhile\n　　while (pivot ＜ data[j])\n　　　j ← j － 1\n　　endwhile\n　　if (i ≧ j)\n　　　繰返し処理を終了する\n　　endif\n　　data[i]とdata[j]の値を入れ替える\n　　i ← i ＋ 1\n　　j ← j － 1\n　endwhile\n　dataの全要素の値を要素番号の順に空白区切りで出力する /*** α ***/\n　if (first ＜ i － 1)\n　　sort(first, i － 1)\n　endif\n　if (j ＋ 1 ＜ last)\n　　sort(j ＋ 1, last)\n　endif",
     "choices": [
       {
         "text": "ア: 1 2 3 4 5",
@@ -1617,18 +1617,18 @@
       },
       {
         "text": "ウ: 2 1 3 4 5",
-        "explanation": "正解。手続 sort の実行結果として正しい順序です。"
+        "explanation": "不正解。出力の順序が異なります。"
       },
       {
         "text": "エ: 2 1 3 5 4",
-        "explanation": "不正解。出力の順序が異なります。"
+        "explanation": "正解。sort(1, 5) の最初の呼び出しでは、ピボットが data[3] の 3 に設定されます。ループ内で要素を探索しますが、data = {2, 1, 3, 5, 4} の初期状態では、ピボット 3 を基準にして左に 2 と 1、右に 5 と 4 があり、既に適切な位置にあるため、要素の入れ替えは行われません。i と j は最終的に 3 で交差し、ループが終了します。したがって、/*** α ***/ の行が最初に実行されるとき、data 配列は初期状態のまま {2, 1, 3, 5, 4} であり、この値が出力されます。"
       }
     ],
-    "correctChoiceIndex": 2
+    "correctChoiceIndex": 3
   },
   {
     "id": 4,
-    "body": "次の記述中の「　　　」に入れる正しい答えを，解答群の中から選べ。\nここで，配列の要素番号は 1 から始まる。\n関数 add は，引数で指定された正の整数 value を大域の整数型の配列 hashArray に格納する。\n格納できた場合は true を返し，格納できなかった場合は false を返す。\nここで，整数 value を hashArray のどの要素に格納すべきかを，関数 calcHash1 及び calcHash2 を利用して決める。手続 test は，関数 add を呼び出して，hashArray に正の整数を格納する。手続test の処理が終了した直後の hashArray の内容は，「　　　」である。\n\n〔プログラム〕\n大域: 整数型の配列: hashArray\n○論理型: add(整数型: value)\n 整数型: i ← calcHash1(value)\n if (hashArray[i] ＝ －1)\n hashArray[i] ← value\n return true\n else\n i ← calcHash2(value)\n if (hashArray[i] ＝ －1)\n hashArray[i] ← value\n return true\n endif\n endif\n return false\n○整数型: calcHash1(整数型: value)\n return (value mod hashArrayの要素数) ＋ 1\n○整数型: calcHash2(整数型: value)\n return ((value ＋ 3) mod hashArrayの要素数) ＋ 1\n○test()\n hashArray ← {5個の －1}\n add(3)\n add(18)\n add(11)\n",
+    "body": "次の記述中の(　　　)に入れる正しい答えを，解答群の中から選べ。\nここで，配列の要素番号は 1 から始まる。\n\n関数 add は，引数で指定された正の整数 value を大域の整数型の配列 hashArray に格納する。\n格納できた場合は true を返し，格納できなかった場合は false を返す。\nここで，整数 value を hashArray のどの要素に格納すべきかを，関数 calcHash1 及び calcHash2 を利用して決める。\n手続 test は，関数 add を呼び出して，hashArray に正の整数を格納する。手続test の処理が終了した直後の hashArray の内容は，(　　　)である。\n\n〔プログラム〕\n大域: 整数型の配列: hashArray\n\n○論理型: add(整数型: value)\n　整数型: i ← calcHash1(value)\n　if (hashArray[i] ＝ －1)\n　　hashArray[i] ← value\n　　return true\n　else\n　　i ← calcHash2(value)\n　　if (hashArray[i] ＝ －1)\n　　　hashArray[i] ← value\n　　　return true\n　　endif\n　endif\n　return false\n\n○整数型: calcHash1(整数型: value)\n　return (value mod hashArrayの要素数) ＋ 1\n\n○整数型: calcHash2(整数型: value)\n　return ((value ＋ 3) mod hashArrayの要素数) ＋ 1\n\n○test()\n　hashArray ← {5個の －1}\n　add(3)\n　add(18)\n　add(11)\n",
     "choices": [
       {
         "text": "ア: {－1, 3, －1, 18, 11}",
@@ -1640,57 +1640,57 @@
       },
       {
         "text": "ウ: {－1, 11, －1, 18, －1}",
-        "explanation": "正解。関数 add の実行結果として正しい配置です。"
+        "explanation": "不正解。配列の要素の配置が異なります。"
       },
       {
         "text": "エ: {－1, 18, －1, 3, 11}",
-        "explanation": "不正解。配列の要素の配置が異なります。"
+        "explanation": "正解。add(3)でhashArray[4]に3を格納。次にadd(18)はcalcHash1で衝突するためcalcHash2を使いhashArray[2]に18を格納。最後にadd(11)もcalcHash1で衝突するためcalcHash2を使いhashArray[5]に11を格納します。この結果、最終的なhashArrayは{-1, 18, -1, 3, 11}となります。"
       },
       {
         "text": "オ: {－1, 18, 11, 3, －1}",
         "explanation": "不正解。配列の要素の配置が異なります。"
       }
     ],
-    "correctChoiceIndex": 2
+    "correctChoiceIndex": 3
   },
   {
     "id": 5,
-    "body": "次のプログラム中の「　a　」 と 「　b　」 に入れる正しい答えの組合せを，解答群の中から選べ。ここで，配列の要素番号は 1 から始まる。\nコサイン類似度は，二つのベクトルの向きの類似性を測る尺度である。\n関数 calcCosineSimilarity は，いずれも要素数が n(n≧1) である実数型の配列 vector1 と vector2 を受け取り，二つの配列のコサイン類似度を返す。配列 vector1 が {a1,a2, …, an}，配列 vector2 が {b1, b2, …, bn} のとき，コサイン類似度は次の数式で計算される。ここで，配列 vector1 と配列 vector2 のいずれも，全ての要素に 0 が格納されていることはないものとする。\n\n〔プログラム〕\n○実数型: calcCosineSimilarity(実数型の配列: vector1, 実数型の配列: vector2)\n 実数型: similarity, numerator, denominator, temp ← 0\n 整数型: i\n numerator ← 0\n\n for (i を 1 から vector1の要素数 まで 1 ずつ増やす)\n numerator ← numerator ＋ 「　a　」\nendfor\n\n for (i を 1 から vector1の要素数 まで 1 ずつ増やす)\ntemp ← temp ＋ vector1[i]の2乗\nendfor\ndenominator ← tempの正の平方根\n\ntemp ← 0\nfor (i を 1 から vector2の要素数 まで 1 ずつ増やす)\ntemp ← temp ＋ vector2[i]の2乗\nendfor\ndenominator ←「　b　」\n\nsimilarity ← numerator ÷ denominator\nreturn similarity",
+    "body": "次のプログラム中の(　a　) と (　b　) に入れる正しい答えの組合せを，解答群の中から選べ。ここで，配列の要素番号は 1 から始まる。\n\nコサイン類似度は，二つのベクトルの向きの類似性を測る尺度である。\n関数 calcCosineSimilarity は，いずれも要素数が n(n≧1) である実数型の配列 vector1 と vector2 を受け取り，二つの配列のコサイン類似度を返す。配列 vector1 が {a1,a2, …, an}，配列 vector2 が {b1, b2, …, bn} のとき，コサイン類似度は次の数式で計算される。ここで，配列 vector1 と配列 vector2 のいずれも，全ての要素に 0 が格納されていることはないものとする。\n\na₁b₁+a₂b₂+⋯+anbn ÷ √a²₁+a²₂+⋯+a²n×√b²₁+b²₂+⋯+b²n\n\n〔プログラム〕\n○実数型: calcCosineSimilarity(実数型の配列: vector1, 実数型の配列: vector2)\n　実数型: similarity, numerator, denominator, temp ← 0\n　整数型: i\n　numerator ← 0\n\n　for (i を 1 から vector1の要素数 まで 1 ずつ増やす)\n　　numerator ← numerator ＋ (　a　)\n　endfor\n\n　for (i を 1 から vector1の要素数 まで 1 ずつ増やす)\n　　temp ← temp ＋ vector1[i]の2乗\n　endfor\n　denominator ← tempの正の平方根\n\n　temp ← 0\n　for (i を 1 から vector2の要素数 まで 1 ずつ増やす)\n　　temp ← temp ＋ vector2[i]の2乗\n　endfor\n　denominator ←(　b　)\n\n　similarity ← numerator ÷ denominator\n　return similarity",
     "choices": [
       {
-        "text": "ア: a「(vector1[i] × vector2[i])の正の 平方根」/ b「denominator × (tempの正の平方根)」",
+        "text": "ア: a「(vector1[i] × vector2[i])の正の平方根」, b「denominator × (tempの正の平方根)」",
         "explanation": "不正解。計算式が異なります。"
       },
       {
-        "text": "イ: a「(vector1[i] × vector2[i])の正の 平方根」/ b 「denominator ＋ (tempの正の平方根)」",
+        "text": "イ: a「(vector1[i] × vector2[i])の正の平方根」, b 「denominator ＋ (tempの正の平方根)」",
         "explanation": "不正解。計算式が異なります。"
       },
       {
-        "text": "ウ: a「 (vector1[i] × vector2[i])の正の 平方根 」/ b「 tempの正の平方根」",
+        "text": "ウ: a「 (vector1[i] × vector2[i])の正の平方根 」, b「 tempの正の平方根」",
         "explanation": "不正解。計算式が異なります。"
       },
       {
-        "text": "エ: a「 vector1[i] × vector2[i] 」/ b「 denominator × (tempの正の平方根)」",
-        "explanation": "正解。コサイン類似度の計算式として正しいです。"
+        "text": "エ: a「 vector1[i] × vector2[i] 」,b「 denominator × (tempの正の平方根)」",
+        "explanation": "正解。コサイン類似度を計算するには、数式の通りに、分子は対応する要素同士を掛けたものの合計（vector1[i] × vector2[i] ）、分母はそれぞれのベクトルの長さ（2乗の合計の平方根）を掛け合わせたもの（denominator × (tempの正の平方根)）が必要です。プログラムはこれを順番に計算しています。"
       },
       {
-        "text": "オ: a「vector1[i] × vector2[i]」/ b「denominator ＋ (tempの正の平方根)」",
+        "text": "オ: a「vector1[i] × vector2[i]」, b「denominator ＋ (tempの正の平方根)」",
         "explanation": "不正解。計算式が異なります。"
       },
       {
-        "text": "カ: a「vector1[i] × vector2[i]」/ b「tempの正の平方根」",
+        "text": "カ: a「vector1[i] × vector2[i]」, b「tempの正の平方根」",
         "explanation": "不正解。計算式が異なります。"
       },
       {
-        "text": "キ: a「vector1[i]の2乗」/ b「denominator × (tempの正の平方根)」",
+        "text": "キ: a「vector1[i]の2乗」, b「denominator × (tempの正の平方根)」",
         "explanation": "不正解。計算式が異なります。"
       },
       {
-        "text": "ク: a「vector1[i]の2乗」/ b「denominator ＋ (tempの正の平方根)」",
+        "text": "ク: a「vector1[i]の2乗」, b「denominator ＋ (tempの正の平方根)」",
         "explanation": "不正解。計算式が異なります。"
       },
       {
-        "text": "ケ: a「vector1[i]の2乗」/ b「tempの正の平方根」",
+        "text": "ケ: a「vector1[i]の2乗」, b「tempの正の平方根」",
         "explanation": "不正解。計算式が異なります。"
       }
     ],
@@ -1698,26 +1698,26 @@
   },
   {
     "id": 6,
-    "body": "A 社は，放送会社や運輸会社向けに広告制作ビジネスを展開している。A 社は，人事業務の効率化を図るべく，人事業務の委託を検討することにした。A 社が委託する業務（以下，B 業務という）を下記「」 に示す。\n\n「・採用予定者から郵送されてくる入社時の誓約書，前職の源泉徴収票などの書類を PDF ファイルに変換し，ファイルサーバに格納する。\n（省略）」\n\n委託先候補の C 社は，B 業務について，次のように A 社に提案した。\n・B 業務だけに従事する専任の従業員を割り当てる。\n・B 業務では，下記「」 の複合機のスキャン機能を使用する。\n\n「・スキャン機能を使用する際は，従業員ごとに付与した利用者 ID とパスワードをパネルに入力する。\n・スキャンしたデータを PDF ファイルに変換する。\n・PDF ファイルを従業員ごとに異なる鍵で暗号化して，電子メールに添付する。\n・スキャンを実行した本人宛てに電子メールを送信する。\n・PDF ファイルが大きい場合は，PDF ファイルを添付する代わりに，自社の社内ネットワーク上に設置したサーバ（以下，B サーバという）※¹ に自動的に保存し，保存先の URL を電子メールの本文に記載して送信する。」\n注 ※¹B サーバにアクセスする際は，従業員ごとの利用者 ID とパスワードが必要になる。\n\nA 社は，C 社と業務委託契約を締結する前に，秘密保持契約を締結した。その後，C社に質問表を送付し，回答を受けて，業務委託での情報セキュリティリスクの評価を実施した。その結果，下記「」 の発見があった。\n\n「・複合機のスキャン機能では，電子メールの差出人アドレス，件名，本文及び添付ファイル名を初期設定 ※¹ の状態で使用しており，誰がスキャンを実行しても同じである。\n・複合機のスキャン機能の初期設定情報はベンダーの Web サイトで公開されており，誰でも閲覧できる。」\n注 ※¹ 複合機の初期設定は C 社の情報システム部だけが変更可能である。\n\nそこで，A 社では，初期設定の状態のままでは A 社にとって情報セキュリティリスクがあり，初期設定から更するという対策が必要であると評価した。\n\n設問 対策が必要であると A 社が評価した情報セキュリティリスクはどれか。解答群のうち，最も適切なものを選べ。",
+    "body": "A 社は，放送会社や運輸会社向けに広告制作ビジネスを展開している。A 社は，人事業務の効率化を図るべく，人事業務の委託を検討することにした。A 社が委託する業務（以下，B 業務という）を図 1に示す。\n\n<div style=\"border: 2px solid #333; padding: 10px; display: inline-block;\">採用予定者から郵送されてくる入社時の誓約書，前職の源泉徴収票などの書類を PDF ファイルに変換し，ファイルサーバに格納する。</div><p style=\"text-align: center;\">図 1　B 業務</P>\n委託先候補の C 社は，B 業務について，次のように A 社に提案した。\n・B 業務だけに従事する専任の従業員を割り当てる。\n・B 業務では，図 2 の複合機のスキャン機能を使用する。\n\n<div style=\"border: 2px solid #333; padding: 10px; display: inline-block;\">・スキャン機能を使用する際は，従業員ごとに付与した利用者 ID とパスワードをパネルに入力する。\n・スキャンしたデータを PDF ファイルに変換する。\n・PDF ファイルを従業員ごとに異なる鍵で暗号化して，電子メールに添付する。\n・スキャンを実行した本人宛てに電子メールを送信する。\n・PDF ファイルが大きい場合は，PDF ファイルを添付する代わりに，自社の社内ネットワーク上に設置したサーバ（以下，B サーバという）※¹ に自動的に保存し，保存先の URL を電子メールの本文に記載して送信する。</div><P>注 ※¹B サーバにアクセスする際は，従業員ごとの利用者 ID とパスワードが必要になる。</P><p style=\"text-align: center;\">図 2　複合機のスキャン機能（抜粋）</P>\n\nA 社は，C 社と業務委託契約を締結する前に，秘密保持契約を締結した。その後，C社に質問表を送付し，回答を受けて，業務委託での情報セキュリティリスクの評価を実施した。その結果，図 3 の発見があった。\n\n<div style=\"border: 2px solid #333; padding: 10px; display: inline-block;\">・複合機のスキャン機能では，電子メールの差出人アドレス，件名，本文及び添付ファイル名を初期設定 ※¹ の状態で使用しており，誰がスキャンを実行しても同じである。\n・複合機のスキャン機能の初期設定情報はベンダーの Web サイトで公開されており，誰でも閲覧できる。</div><P>注 ※¹ 複合機の初期設定は C 社の情報システム部だけが変更可能である。</P><p style=\"text-align: center;\">図 3　発見事項</P>\nそこで，A 社では，初期設定の状態のままでは A 社にとって情報セキュリティリスクがあり，初期設定から更するという対策が必要であると評価した。\n\n設問 対策が必要であると A 社が評価した情報セキュリティリスクはどれか。解答群のうち，最も適切なものを選べ。",
     "choices": [
       {
         "text": "ア: B 業務に従事する従業員が，攻撃者からの電子メールを複合機からのものと信じて本文中にある URL をクリックし，フィッシングサイトに誘導される。その結果，A 社の採用予定者の個人情報が漏えいする。",
-        "explanation": "不正解。B 業務に従事する従業員がフィッシングサイトに誘導されることは、情報セキュリティリスクの一つですが、設問の文脈では直接的なリスクとして評価されていません。"
+        "explanation": "正解。複合機のメール設定が公開されており、誰でも正規のメールを装えるため、攻撃者は偽装メールで従業員をフィッシングサイトへ誘導し、個人情報を漏えいさせるリスクがあります。これは、図3の発見事項が直接的に引き起こす深刻なリスクです。"
       },
       {
         "text": "イ: B 業務に従事する従業員が，複合機から送信される電子メールをスパムメールと誤認し，電子メールを削除する。その結果，再スキャンが必要となり，B 業務が遅延する。",
-        "explanation": "不正解。業務の遅延は業務効率の問題であり、情報セキュリティリスクとしては直接的に評価されていません。"
+        "explanation": "不正解。業務遅延は情報セキュリティリスク（情報漏えい、改ざん、利用妨害など）とは異なります。可用性の問題であり、本設問の文脈とは合致しません。"
       },
       {
         "text": "ウ: 攻撃者が，複合機から送信される電子メールを盗聴し，添付ファイルを暗号化して身代金を要求する。その結果，A 社が復号鍵を受け取るために多額の身代金を支払うことになる。",
-        "explanation": "不正解。これはランサムウェア攻撃の一例であり、情報セキュリティリスクとしては考えられますが、設問の文脈では直接的なリスクとして評価されていません。"
+        "explanation": "不正解。PDFファイルは「従業員ごとに異なる鍵で暗号化」されています。攻撃者がメールを盗聴できたとしても、すでに暗号化されているファイルを「暗号化して身代金を要求する」のは不自然です。復号鍵がなければ意味がありません。"
       },
       {
         "text": "エ: 攻撃者が，複合機から送信される電子メールを盗聴し，本文に記載されている URL を使って B サーバにアクセスする。その結果，A 社の採用予定者の個人情報が漏えいする。",
-        "explanation": "正解。複合機の初期設定情報が公開されているため、攻撃者が容易にアクセスできる状態にあり、情報セキュリティリスクとして評価されています。"
+        "explanation": "不正解。Bサーバへのアクセスには「従業員ごとの利用者IDとパスワードが必要」と明記されています。メールの盗聴だけでは、認証情報がないためBサーバにアクセスすることはできません。"
       }
     ],
-    "correctChoiceIndex": 3
+    "correctChoiceIndex": 0
   }
 ]
 }
